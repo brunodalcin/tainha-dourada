@@ -1,8 +1,6 @@
 
 
 
-
-
 // Exemplo de uso
 //adicionarEmail("exemplo@email.com");
 
