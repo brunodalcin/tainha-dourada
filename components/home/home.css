@@ -10,7 +10,7 @@
     left: 0;
     width: 100%;    
     height: 50vh;
-    background-color: orange;
+    background-color: #ff6700    ;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,7 +42,8 @@
     left: 0;
     width: 100%;
     height: 50vh;
-    background-color: black;
+    background-color: #0019ff;
+    /* background-color: black;     */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,8 +66,7 @@
 .email-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    align-items: center;    
 }
 
 .email-field {
@@ -93,63 +93,23 @@
     margin-top: 10px;
     letter-spacing: 2px;
 }
-  .wave{
-    top:0;
-    left: 0;
-    position: relative;
-  }
-  
-  .waves {
-    position:relative;
-    width: 100%;
-    /* max-height:10vh; */
-    margin-bottom:-7px; /*Fix for safari gap*/
-    height:100%;
-    max-height:300px;
-    align-content: end;    
-  }
 
-  
-  /* Animation */
-  
-  .parallax > use {
-    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
-  }
-  .parallax > use:nth-child(1) {
-    animation-delay: -2s;
-    animation-duration: 7s;
-  }
-  .parallax > use:nth-child(2) {
-    animation-delay: -3s;
-    animation-duration: 10s;
-  }
-  .parallax > use:nth-child(3) {
-    animation-delay: -4s;
-    animation-duration: 13s;
-  }
-  .parallax > use:nth-child(4) {
-    animation-delay: -5s;
-    animation-duration: 20s;
-  }
-  g{
-    background-color: black;
-  }
-  @keyframes move-forever {
-    0% {
-     transform: translate3d(-90px,0,0);
-    }
-    100% { 
-      transform: translate3d(85px,0,0);
-    }
+  .cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #0019ff;
+    color: white;
   }
 
   @media only screen and (min-width: 1200px) {
 
-    .waves {
+    /* .waves {
         height:100px;
         min-height:100px;
         align-content: normal;
-      }
+      } */
 
 
 }
@@ -162,11 +122,11 @@
     .white {
         max-width: 400px;
     }
-    .waves {
+    /* .waves {
         height:40px;
         min-height:40px;
         align-content: normal;
-      }
+      } */
  
       h1 {
         font-size:24px;
