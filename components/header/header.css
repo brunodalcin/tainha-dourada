@@ -1,21 +1,21 @@
 header{
     width: 100%;
-    /* min-height: 80px;
-    height: 13vh;  */
-    background-color: #0019ff;
+    background-color: #ff6700;
     color: white;
+    height: 150px;
+
 }
 header img{
     height: 100px;
 }
 .container{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 100%;
-    padding: 0 20px;    
+    justify-content: center;
+    vertical-align: top;
+    align-items: baseline;
 }
-.btns{
+/* .btns{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,4 +29,4 @@ header img{
 }
 .btns a:hover{
     color: black;
-}
+} */

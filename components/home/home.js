@@ -6,14 +6,17 @@
 customElements.define('home-component', class HomeComponent extends HTMLElement {
     connectedCallback() {
             this.innerHTML = `
-            <link rel="stylesheet" href="components/home/home.css">                  
+            <link rel="stylesheet" href="components/home/home.css">                 
             <div class="container-home">
                 <div class="orange">
+                
                     <div class="blue">
                         <span class="title">TAINHA DOURADA 2024</span><br><br>
                         <span class="txt">EM BREVE!</span>
                     </div>         
                 </div>
+
+
                 <div class="black">            
                     <div class="white">
                         <div class="txts-form">

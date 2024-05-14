@@ -6,13 +6,13 @@
     text-align: center;
     align-items: center;
     vertical-align: top;
-    width: calc(20% - 40px);
+    
     display: inline-block;
     cursor: pointer;
   }
 
   .card-icon {
-    font-size: 40px;
+    font-size: 3rem;
   }
 
   .card-title {
@@ -26,13 +26,11 @@
     margin-bottom: 20px;
   }
 
-  .card-text {
-    font-size: 1rem;
-  }
+  
 
   .footer {
     text-align: center;    
-    background-color: #ff6700;
+    background-color: #0019ff;
     color: white;
     padding: 10px;
   }
@@ -41,6 +39,21 @@
     color: white;
     text-decoration: none;
   }
+  .footer-univali {
+    color: white;
+    text-decoration: none;
+    background-color: #ff6700;  
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-univali img{
+    height: 50px;
+  }
+  .card-univali {
+    padding: 20px;
+    width: 100%;
+  }
+
 
   @media (max-width: 768px) {
     .card {
