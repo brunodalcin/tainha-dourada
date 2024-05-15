@@ -11,10 +11,12 @@ customElements.define('footer-component', class FooterComponent extends HTMLElem
         
           <div class="footer">
             <div class="card" style="cursor:auto">
-              <div class="card-icon"><img src="img/phone.png"></div>
+            <a target="_blank"> 
+              <div class="card-icon"><img src="img/mail.png"></div>
               <div class="card-title">ORGANIZAÇÃO TAINHA DOURADA</div>              
-              <div class="card-description">+55 (47) 3341-7500<br>audiovisual@univali.br</div>
+              <div class="card-description">cinematainhadourada@gmail.com</div>
               <div class="card-text"></div>
+              </a>               
             </div>
             <div class="card">
             <a href="https://festivaltainhadourada2024.com/docs/ficha.pdf" target="_blank">
@@ -42,10 +44,14 @@ customElements.define('footer-component', class FooterComponent extends HTMLElem
             </div>
           </div>
           <div class="footer-univali">
-            <div>ORGANIZAÇÃO</div>                        
-            <div class="card-univali"><img src="img/AUDIOVISUAL-BRANCO-TRANSPARENTE.png"></div>
-            <div>FESTIVAL DE CINEMA UNIVERSITÁRIO TAINHA DOURADA © 2024.</div>              
-          </div>          
+          <div>ORGANIZAÇÃO</div>                        
+          <div class="card-univali"><img src="img/AUDIOVISUAL-BRANCO-TRANSPARENTE.png"></div>
+          <div>FESTIVAL DE CINEMA UNIVERSITÁRIO TAINHA DOURADA © 2024.</div>         
+        
+        </div>
+
+
+              
             `;
     }
 });

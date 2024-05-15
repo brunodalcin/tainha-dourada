@@ -1,14 +1,17 @@
 .card {    
-    color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    text-align: center;
-    align-items: center;
-    vertical-align: top;
-    
-    display: inline-block;
-    cursor: pointer;
+  flex: 1 1 300px; /* flex-grow flex-shrink flex-basis */
+  max-width: 100%; /* Garante que o card não ultrapasse a largura do container */
+  min-width: 200px; /* Largura mínima do card */
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+  align-items: center;
+  vertical-align: top;
+  display: inline-block;
+  cursor: pointer;
+  box-sizing: border-box; 
   }
 
   .card-icon {
@@ -19,11 +22,13 @@
     font-size: 1rem;
     margin-top: 10px;
     margin-bottom: 20px;
+    font-weight: bold;
   }
 
   .card-description {
-    
+    font-size: 1rem;
     margin-bottom: 20px;
+    word-wrap: break-word;
   }
 
   
@@ -33,6 +38,9 @@
     background-color: #0019ff;
     color: white;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .footer a {
@@ -45,6 +53,7 @@
     background-color: #ff6700;  
     justify-content: center;
     text-align: center;
+    position: inherit;
   }
   .footer-univali img{
     height: 50px;
@@ -54,12 +63,6 @@
     width: 100%;
   }
 
-
-  @media (max-width: 768px) {
-    .card {
-      width: calc(50% - 40px);
-    }
-  }
 
   @media (max-width: 480px) {
     .card {

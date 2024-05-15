@@ -16,12 +16,15 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
                     </div>         
                 </div>
 
+   
 
                 <div class="black">            
                     <div class="white">
-                        <div class="txts-form">
-                            <div id="txts">
-                                Fique ligado nas novidades !<br><br>
+                        <div>
+                            <div id="txt1">
+                                Fique ligado nas novidades !
+                            </div>
+                            <div id="txt2">
                                 Digite seu email aqui! *
                             </div>
                             <div class="email-form">
