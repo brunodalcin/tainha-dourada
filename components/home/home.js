@@ -18,7 +18,7 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
 
    
 
-                <div class="black">            
+                <div class="blue-box">            
                     <div class="white">
                         <div>
                             <div id="txt1">

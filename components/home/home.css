@@ -13,7 +13,7 @@
     text-align: center;
     padding-top: 20px; 
     box-sizing: border-box;
-    background-image: url('/img/wave4.png');
+    background-image: url('/img/wave6.png');
     background-position: bottom;
     background-repeat: repeat-x;
 }
@@ -29,7 +29,7 @@
 .blue::after {
     content: '';
     position: absolute;
-    bottom: -40px; /* Coloca a imagem no canto inferior */
+    bottom: -50px; /* Coloca a imagem no canto inferior */
     right: -90px; /* Coloca a imagem no canto direito */
     width: 220px; /* Define a largura da imagem */
     height: 170px; /* Define a altura da imagem */
@@ -57,12 +57,11 @@
     font-weight: lighter;
 }
 
-.black {
+.blue-box {
     /* position: relative; */
     /* top: 50vh; */
     left: 0;
     width: 100%;
-    height: ;
     background-color: #0019ff;
     /* background-color: black;     */
     display: flex;
@@ -131,6 +130,10 @@
 
     .white {
         max-width: 400px;
+    }
+    .blue::after {
+        bottom: 0px; /* Coloca a imagem no canto inferior */
+        left:220px
     }
 }
 
