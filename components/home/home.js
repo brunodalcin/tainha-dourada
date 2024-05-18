@@ -20,7 +20,7 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
 
                 <div class="blue-box">            
                     <div class="white">
-                        <div>
+                       
                             <div id="txt1">
                                 Fique ligado nas novidades !
                             </div>
@@ -34,7 +34,7 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
                                 </form>
                             </div>
                             <div id="email-success" style="display:none;">Email armazenado com sucesso! Você será notificado quando as inscrições forem liberadas.</div>
-                        </div>
+                      
                     </div>
                 </div>
             </div>`;
