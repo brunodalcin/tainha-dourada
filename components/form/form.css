@@ -1,0 +1,83 @@
+body {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fffcf7;
+    border: 5px solid #ff6700;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 24px;
+    color: #0019ff;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px #ff6700;
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #0019ff;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 2px solid #0019ff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fffcf7;
+    box-shadow: 2px 2px #ff6700;
+}
+
+button {
+    padding: 15px 30px;
+    background-color: #0019ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    align-self: center;
+    box-shadow: 3px 3px #ff6700;
+}
+
+button:hover {
+    background-color: #ff6700;
+    color: #ffffff;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group label {
+    flex: 0 0 48%;
+}
+
+@media (max-width: 600px) {
+    .form-group label {
+        flex: 0 0 100%;
+    }
+}
