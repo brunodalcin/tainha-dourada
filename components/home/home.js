@@ -46,17 +46,27 @@ function adicionarEmail(event) {
 
     const email = document.getElementById('email').value;
 
+    // Desabilitar o botão de envio para evitar envios duplicados
+    document.querySelector('.btn-field').disabled = true;
+
     db.collection("EMAILS").add({
         email: email
     })
     .then(() => {
         console.log("Email adicionado com sucesso!");
         document.getElementById('email').value = ''; // Limpar o campo de email após adicionar
-        document.getElementById('email-form').style.display = 'none'; // Ocultar o formulário
-         document.getElementById('txts').style.display = 'none'; // Ocultar o formulário                
+        document.querySelector('.email-form').style.display = 'none'; // Ocultar o formulário
+        document.getElementById('txt1').style.display = 'none'; // Ocultar o formulário
+        document.getElementById('txt2').style.display = 'none'; // Ocultar o formulário
         document.getElementById('email-success').style.display = 'block'; // Mostrar mensagem de sucesso
     })
     .catch((error) => {
         console.error("Erro ao adicionar email: ", error);
+        // Habilitar o botão de envio em caso de erro para permitir que o usuário tente novamente
+        document.querySelector('.btn-field').disabled = false;
     });
 }
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     document.getElementById('email-form').addEventListener('submit', adicionarEmail);
+// });
