@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     width: 100%;    
-    height: 50vh;
+    /* height: 50vh; */
     background-color: #ff6700;
     display: flex;
     flex-direction: column;
@@ -16,22 +16,23 @@
     background-image: url('/img/wave6.png');
     background-position: bottom;
     background-repeat: repeat-x;
+    padding-top: 100px;
 }
 
 .blue {
     vertical-align: text-top;
     position: relative  ;
-    color: white;
-    padding: 20px;
-    top: -50px;
+    color: white;    
+    padding: 40px;
+    top: -25px;
     /* overflow: hidden; */
 }
 
 .blue::after {
     content: '';
     position: absolute;
-    bottom: -50px; /* Coloca a imagem no canto inferior */
-    right: -90px; /* Coloca a imagem no canto direito */
+    bottom: -80px; /* Coloca a imagem no canto inferior */
+    right: -50px; /* Coloca a imagem no canto direito */
     width: 220px; /* Define a largura da imagem */
     height: 170px; /* Define a altura da imagem */
     background-image: url('/img/peixe.png'); /* Define a imagem a ser usada */
@@ -124,19 +125,19 @@
   
 @media only screen and (max-width: 768px) {
     .blue {
-        max-width: 300px;        
+        /* max-width: 300px;         */
     }
 
     .white {
         max-width: 400px;
     }
     .blue::after {
-        bottom: -20px; /* Coloca a imagem no canto inferior */
-        left:180px;
+        bottom: -70px; /* Coloca a imagem no canto inferior */
+        left:200px;
         width: 180px;
         height: 150px;        
         /* overflow: hidden;  */
-        /* max-width: calc(100% - 220px);  */
+        /* max-width: calc(100% - 220px);  */        
     }
 
 }

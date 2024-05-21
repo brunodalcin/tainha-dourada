@@ -11,33 +11,37 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
                 <div class="orange">
                 
                     <div class="blue">
-                        <span class="title">TAINHA DOURADA 2024</span><br><br>
-                        <span class="txt">EM BREVE!</span>
+                        <span class="title">INSCRIÇÕES ABERTAS<br>22/05 A 19/06!</span></span>
                     </div>         
-                </div>
-
-   
-
+                </div>    
                 <div class="blue-box">            
                     <div class="white">
                        
                             <div id="txt1">
-                                Fique ligado nas novidades !
-                            </div>
-                            <div id="txt2">
-                                Digite seu email aqui! *
+                                Clique aqui para se inscrever seu curta!
                             </div>
                             <div class="email-form">
-                                <form id="email-form" onsubmit="adicionarEmail(event)">
-                                    <input class="email-field" type="email" id="email" name="email" required>
-                                    <button class="btn-field" type="submit">Inscrever-se</button>
-                                </form>
-                            </div>
-                            <div id="email-success" style="display:none;">Email armazenado com sucesso! Você será notificado quando as inscrições forem liberadas.</div>
-                      
+                                <button class="btn-field" type="button" id="subscribe-button">Inscrever-se</button>
+                            </div>                      
                     </div>
                 </div>
-            </div>`;
+            </div>
+            `;
+            // Adiciona o evento de clique ao botão
+
+            this.querySelector('#subscribe-button').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                const headerComponent = document.createElement('header-component');
+                document.head.appendChild(headerComponent);
+
+                const contentContainer = document.getElementById('content-container');
+                contentContainer.innerHTML = '';
+                
+                const formComponent = document.createElement('form-component');                
+                contentContainer.appendChild(formComponent);
+                
+            });
     }
 });
 

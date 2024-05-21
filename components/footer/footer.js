@@ -46,7 +46,10 @@ customElements.define('footer-component', class FooterComponent extends HTMLElem
           <div class="footer-univali">
           <div>ORGANIZAÇÃO</div>                        
           <div class="card-univali"><img src="img/univali.png"></div>
-          <div>FESTIVAL DE CINEMA UNIVERSITÁRIO TAINHA DOURADA © 2024.</div>         
+          <div>FESTIVAL DE CINEMA UNIVERSITÁRIO TAINHA DOURADA © 2024.</div>    
+          <div class="student-note">Esse site foi desenvolvido por um aluno de Sistemas para Internet, por favor,<br>
+          <a href="https://forms.gle/ms8pBNhBGFyDm8Gg6">AVALIE</a>
+          </div> 
         
         </div>
 

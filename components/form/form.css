@@ -1,7 +1,7 @@
 body {
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     background-color: #f0f0f0;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 form {
@@ -9,8 +9,8 @@ form {
     flex-direction: column;
     width: 100%;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 25px auto ;
+    padding: 50px;
     background-color: #fffcf7;
     border: 5px solid #ff6700;
     border-radius: 10px;
@@ -68,6 +68,12 @@ button:hover {
 
 .form-group {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group-full {
+    /* display: flex; */
     flex-wrap: wrap;
     justify-content: space-between;
 }

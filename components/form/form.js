@@ -1,7 +1,9 @@
 customElements.define('form-component', class FormComponent extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <link rel="stylesheet" href="components/form/form.css">
+            <link rel="stylesheet" href="components/form/form.css">        
+            <header-component></header-component>
+                                     
             <form id="submission-form">
                 <h2>Dados Pessoais do Responsável pela inscrição</h2>
                 <div class="form-group">
@@ -17,11 +19,14 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
                     <label>Cep: <input type="text" name="cep" required></label>
                 </div>
                 <div class="form-group">
-                    <label>e-mail: <input type="email" name="email" required></label>
+                    <label>E-mail: <input type="email" name="email" required></label>
                     <label>Telefone: <input type="tel" name="telefone" required></label>
                 </div>
 
                 <h2>Ficha Técnica</h2>
+                <div class="form-group-full">
+                    <label>Título do Curta-metragem: <input type="text" name="titulo" required></label>
+                </div>                
                 <div class="form-group">
                     <label>Direção: <input type="text" name="direcao" required></label>
                     <label>Produtor: <input type="text" name="produtor" required></label>
@@ -43,17 +48,17 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
                 </div>
 
                 <h2>Documentos</h2>
-                <div class="form-group">
+                <div class="form-group-full">
                     <label>Comprovação de matrícula: <input type="file" name="matricula" required></label>
                 </div>
-                <div class="form-group">
+                <div class="form-group-full">
                     <label>Ficha de autorização: <input type="file" name="autorizacao" required></label>
                 </div>
-                <div class="form-group">
-                    <label>Cartaz de divulgação: <input type="file" name="cartaz" accept="image/*" required></label>
+                <div class="form-group-full">
+                    <label>Cartaz de divulgação: <input type="file" name="cartaz" required></label>
                 </div>
-                <div class="form-group">
-                    <label>Curtametragem: <input type="file" name="curtametragem" accept="image/*" required></label>
+                <div class="form-group-full">
+                    <label>Curta-metragem: <input type="file" name="curtametragem" accept="video/*" required></label>
                 </div>
 
                 <button type="submit">Enviar</button>
@@ -68,16 +73,21 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
         const form = document.getElementById('submission-form');
         const formData = new FormData(form);
     
+        // Obter o valor do campo 'Título do Curta-metragem'
+        const titulo = formData.get('titulo');
+    
+        // Criar uma referência à pasta com o nome do curta-metragem
+        const storageRef = storage.ref(`uploads/${titulo}`);
+    
         // Prepare data to send to Firebase
         const data = {};
         const promises = [];
     
         formData.forEach((value, key) => {
             if (value instanceof File) {
-                const storageRef = storage.ref(`uploads/${value.name}`);
-                const uploadTask = storageRef.put(value);
+                const fileRef = storageRef.child(value.name);
                 promises.push(
-                    uploadTask.then(snapshot => snapshot.ref.getDownloadURL())
+                    fileRef.put(value).then(snapshot => snapshot.ref.getDownloadURL())
                         .then(url => {
                             data[key] = url;
                         })
@@ -100,6 +110,5 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
                 console.error("Erro ao enviar formulário: ", error);
                 alert('Erro ao enviar formulário. Por favor, tente novamente.');
             });
-    }
-    
-});
+    }});
+
