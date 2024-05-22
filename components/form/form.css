@@ -1,7 +1,10 @@
 body {
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
+    background-color: #ff6600;    
     /* padding: 20px; */
+
+ 
 }
 
 form {
@@ -11,10 +14,11 @@ form {
     max-width: 800px;
     margin: 25px auto ;
     padding: 50px;
-    background-color: #fffcf7;
+    background-color: #fffcf7;        
     border: 5px solid #ff6700;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Ensure form is above bubbles */    
 }
 
 h2 {
@@ -44,7 +48,8 @@ input[type="file"] {
     border-radius: 10px;
     box-sizing: border-box;
     font-size: 16px;
-    background-color: #fffcf7;
+    /* background-color: #fffcf7; */
+    background-color: #f0f0f07b;
     box-shadow: 2px 2px #ff6700;
 }
 
@@ -81,6 +86,78 @@ button:hover {
 .form-group label {
     flex: 0 0 48%;
 }
+
+/* Bubbles */
+.bubbles {
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    background-color: rgba(76, 0, 255, 0.204);
+    border-radius: 50%;
+    opacity: .50;
+    width: 40px;
+    height: 40px;
+    animation: up 15s infinite ease-in-out;
+  }
+  
+  .bubble-2 {
+    left: 350px;
+    animation: up 5s infinite;
+  }
+  
+  .bubble-3 {
+    left: 750px;
+    opacity: .30;
+    animation: up 7s infinite;
+  }
+  
+  .bubble-4 {
+    left: 1150px;
+    animation: up 9s infinite;
+  }
+  
+  .bubble-5 {
+    left: 50px;
+    animation: up 8s infinite;
+  }
+  
+  .bubble-6 {
+    left: 300px;
+    opacity: .30;
+    animation: up 6s infinite;
+  }
+  
+  .bubble-7 {
+    left: 670px;
+    animation: up 7s infinite;
+  }
+  
+  .bubble-8 {
+    left: 1050px;
+    opacity: .30;
+    animation: up 6s infinite;
+  }
+  .background-container {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 50px; /* Space for bubbles to start from */
+    background-image: url('/img/wave-forms.png'); /* Define a imagem a ser usada */      
+    
+    /* background-repeat: no-repeat; */
+    background-repeat: repeat-x;         
+    /* background-size: contain; */
+    background-position-y: bottom;
+
+}
+  /* Bubbles Animation */
+@keyframes up {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-2000px);
+    }
+  }
 
 @media (max-width: 600px) {
     .form-group label {
