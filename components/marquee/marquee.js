@@ -4,8 +4,9 @@ customElements.define('marquee-component', class MarqueeComponent extends HTMLEl
             <link rel="stylesheet" href="components/marquee/marquee.css">
                     
             <div class="section">
-            <video class="background-video" autoplay loop muted>
-                <source src="seu-video.mp4" type="video/mp4">
+            <video id="videoTainha" class="background-video" controls="controls" controls preload="auto" autoplay="autoplay"
+              loop muted playsinline>
+                <source src="/assets/video-home.mp4" type="video/mp4">
                 Seu navegador não suporta o vídeo.
             </video>
     
@@ -24,6 +25,20 @@ customElements.define('marquee-component', class MarqueeComponent extends HTMLEl
             </div>
         </div>
         `;
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const video = document.getElementById('videoTainha');
+            video.volume = 0.15;  // Volume em 25%
+        });
+        var videoMobile = document.getElementById('tainhaDourada');
+
+        // Adiciona um event listener para o evento touchstart (toque na tela)
+        document.addEventListener('touchstart', function() {
+            // Verifica se o vídeo está pausado
+            if (videoMobile.paused) {
+            // Inicia a reprodução do vídeo
+            videoMobile.play();
+    }
+  });
     }
 });
 

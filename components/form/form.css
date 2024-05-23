@@ -87,6 +87,30 @@ button:hover {
     flex: 0 0 48%;
 }
 
+.form-group-radio {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  font-size: 20px;
+  color: #0019ff;
+}
+
+.form-group-radio label {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.form-group-radio label:not(:first-of-type){
+  margin-left: 50px;
+}
+
+.form-group-radio input[type="radio"] {
+  /* margin-right: 50px; */
+  width: 25px;
+  height: 25px;
+}
+
 /* Bubbles */
 .bubbles {
     position: absolute;
@@ -141,7 +165,7 @@ button:hover {
     position: relative;
     overflow: hidden;
     padding-bottom: 50px; /* Space for bubbles to start from */
-    background-image: url('/img/wave-forms.png'); /* Define a imagem a ser usada */      
+    background-image: url('/assets/wave-forms.png'); /* Define a imagem a ser usada */      
     
     /* background-repeat: no-repeat; */
     background-repeat: repeat-x;         
@@ -149,6 +173,8 @@ button:hover {
     background-position-y: bottom;
 
 }
+
+
   /* Bubbles Animation */
 @keyframes up {
     0% {
@@ -163,4 +189,9 @@ button:hover {
     .form-group label {
         flex: 0 0 100%;
     }
+    .form-group-radio label:not(:first-of-type){
+      margin-left: 10px;
+    }
+
+
 }

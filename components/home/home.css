@@ -13,7 +13,7 @@
     text-align: center;
     padding-top: 20px; 
     box-sizing: border-box;
-    background-image: url('/img/wave-home.png');
+    background-image: url('/assets/wave-home.png');
     background-position: bottom;
     background-repeat: repeat-x;
     padding-top: 100px;
@@ -35,7 +35,7 @@
     right: -50px; /* Coloca a imagem no canto direito */
     width: 220px; /* Define a largura da imagem */
     height: 170px; /* Define a altura da imagem */
-    background-image: url('/img/peixe.png'); /* Define a imagem a ser usada */
+    background-image: url('/assets/peixe.png'); /* Define a imagem a ser usada */
     background-size: cover; /* Faz a imagem cobrir todo o espaço */
     transform: rotate(20deg); /* Rotaciona a imagem em 45 graus */
 }

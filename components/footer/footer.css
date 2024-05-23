@@ -1,7 +1,7 @@
 .card {    
-  flex: 1 1 300px; /* flex-grow flex-shrink flex-basis */
+  flex: 1 1 200px; /* flex-grow flex-shrink flex-basis */
   max-width: 100%; /* Garante que o card não ultrapasse a largura do container */
-  min-width: 200px; /* Largura mínima do card */
+  min-width: 10px; /* Largura mínima do card */
   color: white;
   border-radius: 10px;
   padding: 20px;
@@ -17,7 +17,9 @@
   .card-icon {
     font-size: 3rem;
   }
-
+  .card-icon img {
+   height: 50px;
+  }
   .card-title {
     font-size: 1rem;
     margin-top: 10px;
@@ -54,22 +56,42 @@
     justify-content: center;
     text-align: center;
     position: inherit;
-    background-image: url('/img/wave-footer.png');  
+    background-image: url('/assets/wave-footer.png');  
     padding-top: 60px;  
   }
   .footer-univali img{
-    height: 50px;
+    height: 50px;    
   }
-  .card-univali {
+  /* .card-univali {
     padding: 20px;
     width: 100%;
+  } */
+  .card-univali {
+    display: flex;
+    align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    width: 100%; /* Ajuste conforme necessário */
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .card-univali img {
+      max-width: 125px; /* Ajuste conforme necessário */
+      height: auto;
+      margin: 0 10px; /* Espaçamento entre a imagem e os textos */
+  }
+
+  .card-univali .left {
+      text-align: right;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 10px; /* Ajuste conforme necessário */
   }
 
   .student-note {
     font-size: 0.8rem;
     margin-top: 10px;
-    /* margin-bottom: 20px; */
-    /* font-weight: bold; */
   }
 
   .footer-univali a {
@@ -81,6 +103,18 @@
   .footer-univali a:hover {
     color: #0019ff;
     cursor: pointer;
+  }
+  .titulo{
+    font-size: 1.3rem;
+    padding: 15px;
+    font-weight: 600;
+  }
+
+  .footer-univali div {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
   }
 
 

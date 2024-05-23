@@ -58,18 +58,26 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
                 <div class="form-group-full">
                     <label>Título: <input type="text" name="titulo" required></label>
                 </div>   
+
+          
                 <div class="form-group-full">
                     <label>Link de Acesso: <input type="text" name="link-acesso" required></label>
-                    <label>Observações para o acesso (ex: Login e Senha): <input type="text" name="obs-acesso" required></label>                    
+                    <label>Observações para o acesso (ex: Login e Senha): <input type="text" name="obs-acesso"></label>                    
+                </div>   
+                <div class="form-group-radio">
+                    <label>Gênero do Curta-metragem: </label>
+                    <label><input type="radio" name="genero" value="Ficção" required> Ficção</label>
+                    <label><input type="radio" name="genero" value="Documentário"> Documentário</label>
+                    <label><input type="radio" name="genero" value="Videoclipe"> Videoclipe</label>
                 </div>   
 
 
                 <h2>Documentos</h2>
                 <div class="form-group-full">
-                    <label>Comprovação de matrícula: <input type="file" name="matricula" required></label>
+                    <label>Comprovação de matrícula (3 arquivos): <input type="file" name="matricula" multiple required></label>
                 </div>
                 <div class="form-group-full">
-                    <label>Ficha de autorização: <input type="file" name="autorizacao" required></label>
+                    <label>Ficha de autorização preenchida: <input type="file" name="autorizacao" required></label>
                 </div>
                 <div class="form-group-full">
                     <label>Cartaz de divulgação: <input type="file" name="cartaz" required></label>
@@ -89,6 +97,13 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
         const form = document.getElementById('submission-form');
         const formData = new FormData(form);
     
+        // Verifica se foram enviados exatamente 3 arquivos
+        const files = formData.getAll('matricula');
+        if (files.length !== 3) {
+            alert('Por favor, envie exatamente 3 arquivos na Comprovação de Matrícula.');
+            return;
+        }
+    
         // obter o valor do campo 'Título do Curta-metragem'
         const titulo = formData.get('titulo');
     
@@ -101,13 +116,31 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
     
         formData.forEach((value, key) => {
             if (value instanceof File) {
-                const fileRef = storageRef.child(value.name);
-                promises.push(
-                    fileRef.put(value).then(snapshot => snapshot.ref.getDownloadURL())
-                        .then(url => {
-                            data[key] = url;
-                        })
-                );
+                if (Array.isArray(value)) {
+                    // Se for um array de arquivos (caso de campos com múltiplos arquivos)
+                    const files = formData.getAll(key);
+                    files.forEach((file, index) => {
+                        const fileRef = storageRef.child(`${key}_${index + 1}_${file.name}`);
+                        promises.push(
+                            fileRef.put(file).then(snapshot => snapshot.ref.getDownloadURL())
+                                .then(url => {
+                                    if (!data[key]) {
+                                        data[key] = [];
+                                    }
+                                    data[key].push(url);
+                                })
+                        );
+                    });
+                } else {
+                    // Se for apenas um arquivo
+                    const fileRef = storageRef.child(`${key}_${value.name}`);
+                    promises.push(
+                        fileRef.put(value).then(snapshot => snapshot.ref.getDownloadURL())
+                            .then(url => {
+                                data[key] = url;
+                            })
+                    );
+                }
             } else {
                 data[key] = value;
             }
@@ -126,5 +159,8 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
                 console.error("error: ", error);
                 alert('Erro ao enviar formulário. Por favor, tente novamente.');
             });
-    }});
+    }
+    
+    
+});
 

@@ -11,20 +11,22 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
                 <div class="orange">
                 
                     <div class="blue">
-                        <span class="title">INSCRIÇÕES ABERTAS<br>22/05 A 19/06!</span></span>
+                        <span class="title">INSCRIÇÕES ABERTAS<br>22/05 A 19/06</span></span>
                     </div>         
                 </div>    
                 <div class="blue-box">            
                     <div class="white">
                        
                             <div id="txt1">
-                                Clique aqui para se inscrever seu curta!
+                                Clique aqui e inscreva seu curta-metragem!
                             </div>
                             <div class="email-form">
                                 <button class="btn-field" type="button" id="subscribe-button">Inscrever-se</button>
                             </div>                      
                     </div>
+                    
                 </div>
+                
             </div>
             `;
             // Adiciona o evento de clique ao botão

@@ -7,7 +7,7 @@ customElements.define('header-component', class HeaderComponent extends HTMLElem
                             <div class="container">
                                     <!-- Navbar brand -->
                                     
-                                            <a id="home"><img src="img/TAINHA-BRANCO-TRANSPARENTE.png" height="" alt="Tainha Dourada" loading="lazy" /></a>
+                                            <a id="home"><img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" height="" alt="Tainha Dourada" loading="lazy" /></a>
                                     
                                     <!-- Collapsible wrapper -->
                                     <!-- <div class="btns"> 
