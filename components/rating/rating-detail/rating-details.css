@@ -1,0 +1,11 @@
+.movie-detail-container {
+    padding: 20px;
+}
+.movie-detail-container img {
+    max-width: 100%;
+    height: auto;
+}
+.movie-detail-container a {
+    display: block;
+    margin-top: 10px;
+}

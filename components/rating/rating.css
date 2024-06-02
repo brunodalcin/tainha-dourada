@@ -1,0 +1,10 @@
+.movie-block {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.movie-block img {
+    max-width: 100%;
+    height: auto;
+}
