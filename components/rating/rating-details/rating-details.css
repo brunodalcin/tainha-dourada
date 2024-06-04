@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+  }
+  
+  .cartaz {
+    max-width: auto;
+    max-height: 90vh;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .details form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 25px auto;
+    padding: 50px;
+    background-color: #fffcf7;
+    border: 5px solid #ff6700;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .details h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #0019ff;
+  }
+  
+  label {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #0019ff;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 2px solid #0019ff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #f0f0f07b;
+    box-shadow: 2px 2px #ff6700;
+  }
+  

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- HEADER -->
-    <script src="components/header/header.js"></script> 
+    <!-- <script src="components/header/header.js"></script>  -->
 
     <title>Acesso Juri</title>
     <link rel="icon" href="assets/peixe.png" type="image/x-icon" />
@@ -16,16 +16,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="index.css">       
+
+
     
 </head>
 <body>
+    
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="firebase.js"></script>
-
-    <login-component></login-component>
-
+    
+    <div id="content-container">
+        <login-component></login-component>
+    </div>
+    
+    <!-- JS IMPORTS -->    
     <script src="components/login/login.js"></script>
+    <script src="components/rating/rating.js"></script>    
+    <script src="components/rating/rating-details/rating-details.js"></script>        
 </body>
 </html>

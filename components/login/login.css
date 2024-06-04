@@ -39,3 +39,13 @@ body {
     color: red;
     margin-bottom: 10px;
 }
+header {
+    background-color: #ff6700;
+    padding: 20px;
+    text-align: center;
+  }
+header img {
+    max-width: 125px;
+    height: auto;
+}
+ 

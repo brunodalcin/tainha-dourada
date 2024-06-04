@@ -1,8 +1,10 @@
 customElements.define('login-component', class LoginComponent extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <link rel="stylesheet" href="components/login/login.css">
-            <header-component></header-component>
+            <link rel="stylesheet" href="components/login/login.css">            
+            <header>
+             <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">
+            </header>
             <div class="login-container">
                 <h2>Login</h2>
                 <div class="error-message" id="error-message"></div>
@@ -36,23 +38,21 @@ customElements.define('login-component', class LoginComponent extends HTMLElemen
 
                 // Login bem-sucedido
                 console.log('Login bem-sucedido:', userData);
-                window.location.href = '/avaliacao.html';
+                // window.location.href = '/avaliacao.html';
                 // Exibir componentes após login
-                // const headerComponent = document.createElement('header-component');
-                // document.body.prepend(headerComponent);
+                const headerComponent = document.createElement('header-component');
+                document.body.prepend(headerComponent);
 
-                // const contentContainer = document.getElementById('content-container');
-                // if (contentContainer) {
-                //     contentContainer.innerHTML = ''; // Limpa o container
+                const contentContainer = document.getElementById('content-container');
+                if (contentContainer) {
+                    contentContainer.innerHTML = ''; // Limpa o container
 
-                //     const ratingComponent = document.createElement('rating-component');
-                //     contentContainer.appendChild(ratingComponent);
+                    const ratingComponent = document.createElement('rating-component');
+                    contentContainer.appendChild(ratingComponent);
 
-                //     const footerComponent = document.createElement('footer-component');
-                //     contentContainer.appendChild(footerComponent);
-                // } else {
-                //     console.error('Content container not found');
-                // }
+                } else {
+                    console.error('Content container not found');
+                }
 
             } catch (error) {
                 // Erro de login
