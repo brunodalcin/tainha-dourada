@@ -39,13 +39,27 @@ customElements.define('rating-component', class extends HTMLElement {
       `;
 
       this.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', () => {
+        card.addEventListener('click', async() => {
           const titulo = card.getAttribute('data-titulo');
           const selectedMovie = moviesMap[titulo];
           const contentContainer = document.getElementById('content-container');
           contentContainer.innerHTML = ''; // Limpa o conteúdo atual
 
-          const ratingDetails = document.createElement('rating-details-component');
+          try {
+            const movieSnapshot = await firebase.firestore().collection('FORMS').where('titulo', '==', titulo).get();
+            if (movieSnapshot.empty) {
+              throw new Error('Filme não encontrado');
+            }
+      
+            const movieDoc = movieSnapshot.docs[0];
+            const movieId = movieDoc.id;
+            localStorage.setItem('currentMovieId', movieId); // Armazena o ID do filme escolhido no localStorage
+          } catch (error) {
+            console.error('Erro ao obter o ID do filme:', error);
+          }
+
+          const ratingDetails = document.createElement('rating-details-component');          
+
           ratingDetails.movieData = selectedMovie;
           contentContainer.appendChild(ratingDetails);
 
