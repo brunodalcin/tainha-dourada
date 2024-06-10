@@ -23,73 +23,89 @@ customElements.define('rating-details-component', class extends HTMLElement {
     }
 
     const movieId = movie;
-
+    const matriculaFiles = await this.getMatriculaFiles(this._movieData.titulo);    
 
     this.innerHTML = `
       <link rel="stylesheet" href="/components/rating/rating-details/rating-details.css">
+      <div class="container align-items-center">
+        <div>
+            <button type="button" id="voltar">Voltar a listagem</button>
+        </div>          
+        <div class="form-check d-flex mt-1">     
+            <input class="form-check-input-lg" type="checkbox" id="participante" ${this._movieData.PARTICIPANTE ? 'checked' : ''}>
+            <label class="form-check-label-lg ms-1" for="participante">
+                Apto a participar?
+            </label>           
+        </div>
+      </div>
+    
       <div class="container">
         <img class="cartaz" src="${this._movieData.cartaz}" alt="${this._movieData.titulo}">
-        <div class="details">
-          <form id="rating-form">
-            <h2>Ficha Técnica</h2>
-            ${this.createInput('Título', 'titulo', this._movieData.titulo)}
-            ${this.createInput('Produtor', 'produtor', this._movieData.produtor)}
-            ${this.createInput('Direção', 'direcao', this._movieData.direcao)}
-            ${this.createInput('Roteirista', 'roteirista', this._movieData.roteirista)}
-            ${this.createInput('Trilha', 'trilha', this._movieData.trilha)}
-            ${this.createInput('Fotografia', 'fotografia', this._movieData.fotografia)}
-            ${this.createInput('Editor de Som', 'editor_som', this._movieData.editor_som)}
-            ${this.createInput('Editor de Vídeo', 'editor_video', this._movieData.editor_video)}            
-            ${this.createInput('Elenco', 'elenco', this._movieData.elenco)}            
-
-            <h2>Informações Adicionais</h2>
-            ${this.createInput('Arte', 'arte', this._movieData.arte)}
-            ${this.createInput('Autorização', 'autorizacao', this._movieData.autorizacao)}
-            ${this.createInput('Gênero', 'genero', this._movieData.genero)}
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="text-primary">Informações do Curta-metragem</h4>
+            ${this.createInput('Título', 'titulo', this._movieData.titulo)}            
             ${this.createInput('Link de Acesso', 'link-acesso', this._movieData['link-acesso'])}
-            ${this.createInput('Observações de Acesso', 'obs-acesso', this._movieData['obs-acesso'])}            
-
-            <h2>Dados do Cadastrante</h2>
+            ${this.createInput('Observações de Acesso', 'obs-acesso', this._movieData['obs-acesso'])}
+            ${this.createInput('Gênero', 'genero', this._movieData.genero)}
+            <h4 class="text-primary">Dados do Cadastrante</h4>
             ${this.createInput('Nome', 'nome', this._movieData.nome)}
             ${this.createInput('Endereço', 'endereco', this._movieData.endereco)}
             ${this.createInput('Cidade', 'cidade', this._movieData.cidade)}
             ${this.createInput('Estado', 'estado', this._movieData.estado)}
             ${this.createInput('País', 'pais', this._movieData.pais)}
-            ${this.createInput('Email', 'email', this._movieData.email)}                      
+            ${this.createInput('Email', 'email', this._movieData.email)}
             ${this.createInput('CEP', 'cep', this._movieData.cep)}
-            ${this.createInput('Telefone', 'telefone', this._movieData.telefone)}
-            
-            <h2>Documentação</h2>
-            ${this.createInput('Matrícula', 'matricula', this._movieData.matricula)}
-            
-            <h2>Deixe sua Nota</h2>
-            <div class="form-group">
-              <label for="rating">Nota</label>
-              <select id="rating" class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+            ${this.createInput('Telefone', 'telefone', this._movieData.telefone)}            
+          </div>        
+          <div class="col-md-6">
+            <h4 class="text-primary">Documentos</h4>
+            ${this.createInput('Cartaz', 'cartaz', this._movieData.cartaz)}            
+            ${this.createInput('Ficha de Autorização', 'autorizacao', this._movieData.autorizacao)}
+            ${this.createInput('Matrícula', 'matricula', matriculaFiles)}    
+            <h4 class="text-primary">Ficha Técnica<br></h4>
+            ${this.createInput('Produtor', 'produtor', this._movieData.produtor)}
+            ${this.createInput('Direção', 'direcao', this._movieData.direcao)}
+            ${this.createInput('Roteirista', 'roteirista', this._movieData.roteirista)}
+            ${this.createInput('Trilha', 'trilha', this._movieData.trilha)}
+            ${this.createInput('Fotografia', 'fotografia', this._movieData.fotografia)}
+            ${this.createInput('Arte', 'arte', this._movieData.arte)}            
+            ${this.createInput('Editor de Som', 'editor_som', this._movieData.editor_som)}
+            ${this.createInput('Editor de Vídeo', 'editor_video', this._movieData.editor_video)}
+            ${this.createInput('Elenco', 'elenco', this._movieData.elenco)}                    
+          </div>
+        </div>      
+      </div>    
+    `;
+
+    // this.querySelector('#submit-rating').addEventListener('click', () => this.submitRating(user.uid, movieId));
+    this.querySelector('#participante').addEventListener('change', () => this.updateParticipante(movieId));    
+    this.querySelector('#voltar').addEventListener('click', () => this.voltar());        
+  }
+
+  createInput(label, id, values) {
+    if (id === 'matricula' && !Array.isArray(values)) {
+        values = [values];
+    }
+
+    if (!Array.isArray(values)) {
+        return `
+            <div class="form-outline" data-mdb-input-init>
+                <label class="form-label" for="${id}">${label}</label>
+                <input class="form-control" id="${id}" type="text" value="${values}" readonly>
             </div>
-            <button type="button" id="submit-rating" class="btn btn-primary">Enviar Nota</button>
-          </form>
+        `;
+    }
+
+    return values.map((value, index) => `
+        <div class="form-outline" data-mdb-input-init>
+            <label class="form-label" for="${id}_${index}">${label}${id === 'matricula' ? ` ${index + 1}` : ''}</label>
+            <input class="form-control" id="${id}_${index}" type="text" value="${value}" readonly>
         </div>
-      </div>
-    `;
+    `).join('');
+}
 
-    this.querySelector('#submit-rating').addEventListener('click', () => this.submitRating(user.uid, movieId));
-  }
 
-  createInput(label, id, value) {
-    return `
-      <div class="form-group col-md-6">
-        <label for="${id}">${label}</label>
-        <input type="text" class="form-control" id="${id}" value="${value}" readonly>
-      </div>
-    `;
-  }
 
   async getCurrentUser() {
     const userId = localStorage.getItem('loggedInUserId');
@@ -117,7 +133,6 @@ customElements.define('rating-details-component', class extends HTMLElement {
   
     return movieId;
   }
-  
 
   async submitRating(userId, movieId) {
     const rating = this.querySelector('#rating').value;
@@ -143,4 +158,49 @@ customElements.define('rating-details-component', class extends HTMLElement {
       alert('Erro ao enviar a nota. Tente novamente.');
     }
   }
+  async updateParticipante(movieId) {
+    const participanteCheckbox = this.querySelector('#participante');
+    const participante = participanteCheckbox.checked;
+  
+    try {
+      await firebase.firestore().collection('FORMS').doc(movieId).update({ PARTICIPANTE: participante });
+      console.log('Campo PARTICIPANTE atualizado com sucesso!');
+      alert('Campo atualizado com sucesso!')
+    } catch (error) {
+      console.error('Erro ao atualizar o campo PARTICIPANTE:', error);
+      alert('Erro ao atualizar o campo PARTICIPANTE. Tente novamente.');
+    }
+  }
+
+  async getMatriculaFiles(titulo) {
+    const storageRef = firebase.storage().ref(`/uploads/${titulo}`);
+    try {
+        const files = await storageRef.listAll();
+        const matriculaFiles = files.items.filter(item => item.name.startsWith('matricula'));
+        const downloadUrls = await Promise.all(matriculaFiles.map(file => file.getDownloadURL()));
+        return downloadUrls;
+    } catch (error) {
+        console.error('Erro ao obter arquivos de matrícula:', error);
+        return [];
+    }
+  }
+  voltar(){
+    const headerComponent = document.createElement('header-component');
+    document.body.prepend(headerComponent);
+
+    const contentContainer = document.getElementById('content-container');
+    if (contentContainer) {
+        contentContainer.innerHTML = ''; // Limpa o container
+
+        const ratingComponent = document.createElement('rating-component');
+        contentContainer.appendChild(ratingComponent);
+
+    } else {
+      console.error('Content container not found');
+    }    
+
+  }
+
+  
 });
+

@@ -1,41 +1,30 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css');
+
 .container {
     display: flex;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
     width: 100%;
   }
+
+  input[type="checkbox"]{
+    width: 1.7rem;
+    height: 1.7rem;  
+  }
+  input[type="checkbox"]:hover{
+    cursor: pointer;
+  }  
   
   .cartaz {
-    max-width: auto;
-    max-height: 90vh;
+    max-width: 33%;
+    height: 100%;
     border-radius: 8px;
     margin-right: 20px;
+    border: 2px solid #ff6700;
   }
-  
-  .details form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 25px auto;
-    padding: 50px;
-    background-color: #fffcf7;
-    border: 5px solid #ff6700;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .details h2 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #0019ff;
-  }
-  
   label {
-    margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: #0019ff;
   }
   
@@ -54,4 +43,22 @@
     background-color: #f0f0f07b;
     box-shadow: 2px 2px #ff6700;
   }
+  button {
+    padding: 10px 30px;
+    background-color: #0019ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    /* margin-top: 20px; */
+    align-self: center;
+    align-items: center;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #ff6700;
+    color: #ffffff;
+}  
   

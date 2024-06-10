@@ -35,7 +35,7 @@ customElements.define('footer-component', class FooterComponent extends HTMLElem
             </a>            
             </div> 
             <div class="card">
-            <a href="https://festivaltainhadourada2024.com/docs/regulamento2024.pdf" target="_blank">
+            <a href="https://festivaltainhadourada2024.com/docs/regulamento.pdf" target="_blank">
               <div class="card-icon"><img src="assets/file.png"></div>
               <div class="card-title">REGULAMENTO</div>              
               <div class="card-description">Verifique o edital do festival</div>
@@ -50,6 +50,14 @@ customElements.define('footer-component', class FooterComponent extends HTMLElem
               <div class="card-text"></div>   
             </a>             
             </div>
+            <div class="card">
+              <a href="/acesso-juri.html">
+              <div class="card-icon"><img src="assets/rating.png"></div>
+              <div class="card-title">ACESSO JURI</div>              
+              <div class="card-description"></div>
+              <div class="card-text"></div>   
+            </a>             
+        </div>
           </div>
           <div class="footer-univali">
             <div class="titulo">ORGANIZAÇÃO</div>                        
