@@ -74,7 +74,7 @@ customElements.define('form-component', class FormComponent extends HTMLElement 
 
                 <h2>Documentos</h2>
                 <div class="form-group-full">
-                    <label>Comprovação de matrícula (3 estudantes diferentes): <input type="file" name="matricula" multiple required></label>
+                    <label>Comprovação de matrícula (3 arquivos): <input type="file" name="matricula" multiple required></label>
                 </div>
                 <div class="form-group-full">
                     <label>Ficha de autorização preenchida: <input type="file" name="autorizacao" required></label>
