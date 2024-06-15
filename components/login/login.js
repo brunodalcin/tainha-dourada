@@ -44,20 +44,9 @@ customElements.define('login-component', class LoginComponent extends HTMLElemen
               console.log('Login bem-sucedido:', userData);
               localStorage.setItem('loggedInUserId', userDoc.id); // Armazena o ID do usuário logado no localStorage
           
-              // Redireciona para a página de avaliação ou exibe componentes após login
-              const headerComponent = document.createElement('header-component');
-              document.body.prepend(headerComponent);
+              // Carrega o componente de avaliação de filmes
+              loadComponent('rating');
 
-              const contentContainer = document.getElementById('content-container');
-              if (contentContainer) {
-                  contentContainer.innerHTML = ''; // Limpa o container
-
-                  const ratingComponent = document.createElement('rating-component');
-                  contentContainer.appendChild(ratingComponent);
-
-              } else {
-                console.error('Content container not found');
-              }
             } catch (error) {
               // Erro de login
               console.error('Erro de login:', error);

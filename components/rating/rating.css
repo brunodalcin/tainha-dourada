@@ -11,8 +11,9 @@
   border-radius: 10%;             
 }
 .card:hover {
-  transform: scale(1.075);
-  transition: transform 0.5s;
+  transform: scale(1.03);
+  /* border: 2px solid rgb(201, 223, 231); */
+  /* transition: transform 1.5s; */
   cursor: pointer;     
 }
 header {
@@ -26,5 +27,9 @@ header img {
   }
 h1 {
     text-align: center;
-    margin-top: 20px;
+    margin: 30px;
+    color:#0019ff;
+    /* font-weight: bold; */
   }
+  
+  
