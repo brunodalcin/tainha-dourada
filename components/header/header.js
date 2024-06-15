@@ -14,14 +14,16 @@ customElements.define('header-component', class HeaderComponent extends HTMLElem
             this.querySelector('#home').addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                const contentContainer = document.getElementById('content-container');
-                contentContainer.innerHTML = '';
+                // const contentContainer = document.getElementById('content-container');
+                // contentContainer.innerHTML = '';                
                 
-                const marqueeComponent = document.createElement('marquee-component');                
-                contentContainer.appendChild(marqueeComponent);
+                // const marqueeComponent = document.createElement('marquee-component');                
+                // contentContainer.appendChild(marqueeComponent);
 
-                const homeComponent = document.createElement('home-component');                
-                contentContainer.appendChild(homeComponent);
+                // const homeComponent = document.createElement('home-component');                
+                // contentContainer.appendChild(homeComponent);
+                loadComponent('marquee');
+                loadComponent('home');                
                 
             });            
     }
