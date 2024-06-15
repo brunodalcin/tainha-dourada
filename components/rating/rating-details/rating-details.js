@@ -36,22 +36,22 @@ customElements.define(
         <div>
             <button type="button" id="voltar">Voltar a listagem</button>
         </div>          
-<div class="form-check d-flex mt-1">     
-  <input class="form-check-input-lg" type="checkbox" id="participante" ${
-    this._movieData.PARTICIPANTE ? "checked" : ""
-  }>
-  <label class="form-check-label-lg ms-1" for="participante">
-    Apto a participar?
-  </label>           
-</div>
-<div class="form-check d-flex mt-1">     
-  <input class="form-check-input-lg" type="checkbox" id="pepa" ${
-    this._movieData.PEPA ? "checked" : ""
-  }>
-  <label class="form-check-label-lg ms-1" for="pepa">
-    É um Pepa?
-  </label>           
-</div>
+      <div class="form-check d-flex mt-1">     
+        <input class="form-check-input-lg" type="checkbox" id="participante" ${
+          this._movieData.PARTICIPANTE ? "checked" : ""
+        }>
+        <label class="form-check-label-lg ms-1" for="participante">
+          Apto a participar?
+        </label>           
+      </div>
+      <div class="form-check d-flex mt-1">     
+        <input class="form-check-input-lg" type="checkbox" id="pepa" ${
+          this._movieData.PEPA ? "checked" : ""
+        }>
+        <label class="form-check-label-lg ms-1" for="pepa">
+          É um Pepa?
+        </label>           
+      </div>
       
       </div>
     
@@ -61,6 +61,29 @@ customElements.define(
       }">
         <div class="row">
           <div class="col-md-6">
+           <h2>Deixe sua Nota</h2>
+            <div class="form-group">
+              <label for="rating">Aspectos Técnicos</label>
+              <select id="rating" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <label for="rating">Concepção Estética</label>              
+              <select id="rating" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <label for="rating">Relevância do Tema</label>              
+              <select id="rating" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>                            
+            </div>
+            <button type="button" id="submit-rating" class="btn btn-primary">Enviar Nota</button>
             <h4 class="text-primary">Informações do Curta-metragem</h4>
             ${this.createInput(
               "Título",
@@ -152,7 +175,7 @@ customElements.define(
       </div>    
     `;
 
-      // this.querySelector('#submit-rating').addEventListener('click', () => this.submitRating(user.uid, movieId));
+      this.querySelector('#submit-rating').addEventListener('click', () => this.submitRating(user.uid, movieId));
 
       // Checkboxes
       document.querySelector("#participante").addEventListener("change", () => {
@@ -237,18 +260,20 @@ customElements.define(
       }
 
       const ratingData = {
-        userId: userId,
-        movieId: movieId,
-        rating: parseInt(rating, 10),
+        usuario: userId,
+        filme: movieId,
+        aspectoTecnico: parseInt(rating, 4),
+        concepcaoEstetica: parseInt(rating, 3),
+        relevanciaTema: parseInt(rating, 3),                
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       };
 
       try {
         await firebase.firestore().collection("RATINGS").add(ratingData);
-        alert("Nota enviada com sucesso!");
+        alert("Notas enviadas com sucesso!");
       } catch (error) {
-        console.error("Erro ao enviar a nota:", error);
-        alert("Erro ao enviar a nota. Tente novamente.");
+        console.error("Erro ao enviar as notas:", error);
+        alert("Erro ao enviar as notas. Tente novamente.");
       }
     }
 

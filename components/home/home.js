@@ -53,14 +53,17 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
             this.querySelector('#subscribe-button').addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 
+
                 const headerComponent = document.createElement('header-component');
                 document.head.appendChild(headerComponent);
 
-                const contentContainer = document.getElementById('content-container');
-                contentContainer.innerHTML = '';
+                // const contentContainer = document.getElementById('content-container');
+                // contentContainer.innerHTML = '';
+
+                loadComponent('form');
                 
-                const formComponent = document.createElement('form-component');                
-                contentContainer.appendChild(formComponent);
+                // const formComponent = document.createElement('form-component');                
+                // contentContainer.appendChild(formComponent);
                 
             });
             // Adiciona um event listener para o evento touchstart (toque na tela)
@@ -71,39 +74,33 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
                 videoMobile.play();     
                 } 
             });
-
-            
-
                
     }
 });
 
-function adicionarEmail(event) {
-    event.preventDefault(); // Impedir que a página recarregue
+// function adicionarEmail(event) {
+//     event.preventDefault(); // Impedir que a página recarregue
 
-    const email = document.getElementById('email').value;
+//     const email = document.getElementById('email').value;
 
-    // Desabilitar o botão de envio para evitar envios duplicados
-    document.querySelector('.btn-field').disabled = true;
+//     // Desabilitar o botão de envio para evitar envios duplicados
+//     document.querySelector('.btn-field').disabled = true;
 
-    db.collection("EMAILS").add({
-        email: email
-    })
-    .then(() => {
-        console.log("Email adicionado com sucesso!");
-        document.getElementById('email').value = ''; // Limpar o campo de email após adicionar
-        document.querySelector('.email-form').style.display = 'none'; // Ocultar o formulário
-        document.getElementById('txt1').style.display = 'none'; // Ocultar o formulário
-        document.getElementById('txt2').style.display = 'none'; // Ocultar o formulário
-        document.getElementById('email-success').style.display = 'block'; // Mostrar mensagem de sucesso
-    })
-    .catch((error) => {
-        console.error("Erro ao adicionar email: ", error);
-        // Habilitar o botão de envio em caso de erro para permitir que o usuário tente novamente
-        document.querySelector('.btn-field').disabled = false;
-    });
-}
+//     db.collection("EMAILS").add({
+//         email: email
+//     })
+//     .then(() => {
+//         console.log("Email adicionado com sucesso!");
+//         document.getElementById('email').value = ''; // Limpar o campo de email após adicionar
+//         document.querySelector('.email-form').style.display = 'none'; // Ocultar o formulário
+//         document.getElementById('txt1').style.display = 'none'; // Ocultar o formulário
+//         document.getElementById('txt2').style.display = 'none'; // Ocultar o formulário
+//         document.getElementById('email-success').style.display = 'block'; // Mostrar mensagem de sucesso
+//     })
+//     .catch((error) => {
+//         console.error("Erro ao adicionar email: ", error);
+//         // Habilitar o botão de envio em caso de erro para permitir que o usuário tente novamente
+//         document.querySelector('.btn-field').disabled = false;
+//     });
+// }
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     document.getElementById('email-form').addEventListener('submit', adicionarEmail);
-// });
