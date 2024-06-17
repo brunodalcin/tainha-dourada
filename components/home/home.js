@@ -52,18 +52,11 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
             // Adiciona o evento de clique ao botão de inscrição
             this.querySelector('#subscribe-button').addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                
 
                 const headerComponent = document.createElement('header-component');
                 document.head.appendChild(headerComponent);
 
-                // const contentContainer = document.getElementById('content-container');
-                // contentContainer.innerHTML = '';
-
                 loadComponent('form');
-                
-                // const formComponent = document.createElement('form-component');                
-                // contentContainer.appendChild(formComponent);
                 
             });
             // Adiciona um event listener para o evento touchstart (toque na tela)

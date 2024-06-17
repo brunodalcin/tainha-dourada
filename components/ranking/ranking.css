@@ -1,0 +1,41 @@
+.ranking-table h4 {
+    color: #333;
+}
+
+.table-light th,
+.table-light td {
+    color: #555;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-sm th,
+.table-sm td {
+    padding: 0.3rem;
+}
+
+header {
+    background-color: #ff6700;
+    padding: 20px;
+    text-align: center;
+}
+
+header img {
+    max-width: 150px;
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px;
+    color: #0019ff;
+    /* font-weight: bold; */
+}
+
+#curtas-btn {
+    margin: 10px 0px;
+    padding: 5px 40px;
+    font-size: 1rem;
+}

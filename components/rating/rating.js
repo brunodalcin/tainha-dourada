@@ -1,14 +1,22 @@
 customElements.define('rating-component', class extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
     const db = firebase.firestore();
     const formsRef = db.collection('FORMS');
+
+    // Verificando se é ADM
+
+    const user = await getCurrentUser();
+    const isAdm = user.login === 'adm';
 
     let selectedGenre = null;
 
     this.innerHTML = `
       <link rel="stylesheet" href="/components/rating/rating.css">
       <header>
-        <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">
+        <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">           
+            <div btn-group d-flex " ${isAdm ? '' : 'style="display:none"'} ">
+              <button id="ranking-btn" class="btn btn-primary">Ver Rankings</button>                
+            </div>       
       </header>                
       <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check" name="genre" id="btn-check-todos" autocomplete="off" value="todos" checked>
@@ -31,7 +39,8 @@ customElements.define('rating-component', class extends HTMLElement {
       <div class="container">
         <div class="row" id="movie-list"></div>
       </div>
-    `;
+    `; 
+
 
     const renderMovies = async () => {
       let query = formsRef;
@@ -109,6 +118,13 @@ customElements.define('rating-component', class extends HTMLElement {
 
     renderMovies();
 
+
+    // Adiciona o evento de clique ao botão de ranking
+    this.querySelector('#ranking-btn').addEventListener('click', () => {
+      loadComponent('ranking');
+    });
+  
+
     document.addEventListener('change', (event) => {
       if (event.target && event.target.name === 'genre') {
         selectedGenre = event.target.value;
@@ -117,3 +133,4 @@ customElements.define('rating-component', class extends HTMLElement {
     });
   }
 });
+

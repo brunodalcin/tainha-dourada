@@ -1,4 +1,4 @@
-customElements.define(
+ customElements.define(  
   "rating-details-component",
   class extends HTMLElement {
     connectedCallback() {
@@ -18,7 +18,7 @@ customElements.define(
       if (!this._movieData) return;
 
       const movie = await this.getCurrentMovie();
-      const user = await this.getCurrentUser();
+      const user = await getCurrentUser();
       if (!user) {
         this.innerHTML =
           "<p>Você precisa estar logado para avaliar este filme.</p>";
@@ -189,24 +189,6 @@ customElements.define(
           <input class="form-control" id="${id}_${index}" type="text" value="${value}" readonly>
         </div>
       `).join("");
-    }
-
-    async getCurrentUser() {
-      const userId = localStorage.getItem("loggedInUserId");
-      if (!userId) {
-        return null;
-      }
-
-      try {
-        const userDoc = await firebase.firestore().collection("USERS").doc(userId).get();
-        if (!userDoc.exists) {
-          return null;
-        }
-        return { uid: userDoc.id, ...userDoc.data() };
-      } catch (error) {
-        console.error("Erro ao obter o usuário logado:", error);
-        return null;
-      }
     }
 
     async getCurrentMovie() {
