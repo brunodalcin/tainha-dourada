@@ -116,15 +116,15 @@
                 <div class="form-group">
                   <label for="n1">Aspectos Técnicos </label>
                   <div class="star-rating">
-                    ${this.createStars("n1", userRating ? userRating.aspectoTecnico : 0, 4)}
+                    ${this.createStars("n1", userRating ? userRating.aspectoTecnico : 0, 5)}
                   </div>
                   <label for="n2">Concepção Estética</label>
                   <div class="star-rating">
-                    ${this.createStars("n2", userRating ? userRating.concepcaoEstetica : 0, 3)}
+                    ${this.createStars("n2", userRating ? userRating.concepcaoEstetica : 0, 5)}
                   </div>
                   <label for="n3">Relevância do Tema</label>
                   <div class="star-rating">
-                    ${this.createStars("n3", userRating ? userRating.relevanciaTema : 0, 3)}
+                    ${this.createStars("n3", userRating ? userRating.relevanciaTema : 0, 5)}
                   </div>
                 </div>
                 <button type="button" id="submit-rating" class="btn btn-primary" ${userRating ? "disabled" : ""}>Enviar Notas</button>
