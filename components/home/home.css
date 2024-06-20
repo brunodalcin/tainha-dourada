@@ -23,7 +23,7 @@
     vertical-align: text-top;
     position: relative  ;
     color: white;    
-    padding: 40px;
+    padding: 70px;
     top: -25px;
     /* overflow: hidden; */
 }
@@ -31,8 +31,8 @@
 .blue::after {
     content: '';
     position: absolute;
-    bottom: -80px; /* Coloca a imagem no canto inferior */
-    right: -50px; /* Coloca a imagem no canto direito */
+    bottom: -70px; /* Coloca a imagem no canto inferior */
+    right: 340px; /* Coloca a imagem no canto direito */
     width: 220px; /* Define a largura da imagem */
     height: 170px; /* Define a altura da imagem */
     background-image: url('/assets/peixe.png'); /* Define a imagem a ser usada */
@@ -51,7 +51,7 @@
 
 .blue .title {
     font-size: 3rem;
-    font-weight: bolder;
+    font-weight: bolder;    
 }
 
 .blue .txt {
@@ -133,7 +133,7 @@
     }
     .blue::after {
         bottom: -70px; /* Coloca a imagem no canto inferior */
-        left:200px;
+        left:160px;
         width: 180px;
         height: 150px;        
         /* overflow: hidden;  */

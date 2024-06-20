@@ -30,35 +30,25 @@ customElements.define('home-component', class HomeComponent extends HTMLElement 
                 <div class="orange">
                 
                     <div class="blue">
-                        <span class="title">INSCRIÇÕES ABERTAS<br>22/05 A 19/06</span></span>
+                        <span class="title">INSCRIÇÕES ENCERRADAS</span><br>
+                        <span>Obrigado aos mais de 100 inscritos! Acompanhe as atualizações do festival pelo nosso instagram.</span>
                     </div>         
                 </div>    
-                <div class="blue-box">            
-                    <div class="white">
-                       
-                            <div id="txt1">
-                                Clique aqui e inscreva seu curta-metragem!
-                            </div>
-                            <div class="email-form">
-                                <button class="btn-field" type="button" id="subscribe-button">Inscrever-se</button>
-                            </div>                      
-                    </div>
-                    
-                </div>
+
                 
             </div>
             `;
             
             // Adiciona o evento de clique ao botão de inscrição
-            this.querySelector('#subscribe-button').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            // this.querySelector('#subscribe-button').addEventListener('click', () => {
+            //     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                const headerComponent = document.createElement('header-component');
-                document.head.appendChild(headerComponent);
+            //     const headerComponent = document.createElement('header-component');
+            //     document.head.appendChild(headerComponent);
 
-                loadComponent('form');
+            //     loadComponent('form');
                 
-            });
+            // });
             // Adiciona um event listener para o evento touchstart (toque na tela)
             document.addEventListener('touchstart', function() {
                 // Verifica se o vídeo está pausado

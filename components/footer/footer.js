@@ -18,14 +18,14 @@ customElements.define('footer-component', class FooterComponent extends HTMLElem
               <div class="card-text"></div>
               </a>               
             </div>
-            <div class="card">
+       <!-- <div class="card">
             <a href="https://festivaltainhadourada2024.com/docs/ficha.pdf" target="_blank">
               <div class="card-icon"><img src="assets/file.png"></div>
               <div class="card-title">FICHA DE AUTORIZAÇÃO</div>              
               <div class="card-description">Faça o download aqui!</div>
               <div class="card-text"></div>  
             </a>              
-            </div>
+            </div>-->
             <div class="card" style="word-break: break-;">
             <a href="https://siaiap37.univali.br/elis4/" target="_blank">
               <div class="card-icon"><img src="assets/elis.png"></div>
