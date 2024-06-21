@@ -9,7 +9,7 @@ customElements.define(
 
       let selectedGenre = null;
 
-      this.innerHTML = `
+      this.innerHTML = ` 
   <link rel="stylesheet" href="/components/rating/rating.css">
   <header>
     <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">           
@@ -37,8 +37,7 @@ customElements.define(
 
   <div class="container">
     <div class="row" id="movie-list"></div>
-  </div>
-`;
+  </div>`;
 
       const renderMovies = async () => {
         let query = formsRef;
@@ -55,26 +54,29 @@ customElements.define(
           const moviesMap = {};
           querySnapshot.forEach((doc) => {
             const movie = doc.data();
+            const uid = doc.id;
             if (!moviesMap[movie.titulo]) {
-              moviesMap[movie.titulo] = movie;
+              moviesMap[movie.titulo] = { ...movie, uid };
             }
           });
           const movies = Object.values(moviesMap);
           const movieList = document.getElementById("movie-list");
+
+          //
+
           movieList.innerHTML = "";
           movies.forEach((movie) => {
             const col = document.createElement("div");
             col.classList.add("col-md-3");
-            col.innerHTML = `
+            col.innerHTML = ` 
         <div class="card" data-titulo="${movie.titulo}">
-          <img data-src="${movie.cartaz}" class="card-img-top movie-img" alt="...">
+          <img data-src="https://festivaltainhadourada2024.com/img/${movie.uid}.webp" class="card-img-top movie-img" alt="...">
           <div class="card-body">
             <h5 class="card-title">${movie.titulo}</h5>
             <p class="card-text">Direção: ${movie.direcao}</p>
             <p class="card-text text-end">Gênero: ${movie.genero}</p>                      
           </div>
-        </div>
-      `;
+        </div>`;
             movieList.appendChild(col);
           });
 

@@ -62,7 +62,7 @@
       if (isAdm) {
         this.innerHTML += `
         <div class="container">
-          <img class="cartaz" src="${this._movieData.cartaz}" alt="${this._movieData.titulo}">        
+          <img class="cartaz" src="https://festivaltainhadourada2024.com/img/${movieId}.webp" alt="${this._movieData.titulo}">        
             <div class="row">
               <div class="col-md-6">
                 <h4 class="text-primary">Informações do Curta-metragem</h4>
@@ -82,7 +82,7 @@
               </div>
               <div class="col-md-6">
                 <h4 class="text-primary">Documentos</h4>
-                ${this.createInput("Cartaz", "cartaz", this._movieData.cartaz)}            
+                ${this.createInput("Cartaz", "cartaz", `https://festivaltainhadourada2024.com/img/${movieId}.webp`)}            
                 ${this.createInput("Ficha de Autorização", "autorizacao", this._movieData.autorizacao)}
                 ${this.createInput("Matrícula", "matricula", matriculaFiles)}    
                 <h4 class="text-primary">Ficha Técnica<br></h4>
