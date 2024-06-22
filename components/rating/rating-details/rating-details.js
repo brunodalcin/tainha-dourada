@@ -167,28 +167,36 @@
       return stars;
     }
     
-    
-
     createInput(label, id, values) {
-      if (id === "matricula" && !Array.isArray(values)) {
+      // Lista de IDs que precisam do link clicável
+      const linkFields = ["link-acesso", "autorizacao", "cartaz", "matricula"];
+    
+      // Transformar valores não-array em array para consistência
+      if (!Array.isArray(values)) {
         values = [values];
       }
-
-      if (!Array.isArray(values)) {
+    
+      // Função auxiliar para criar o HTML do link
+      const createLink = (value, id, index) => `
+        <a href="${value}" target="_blank" class="link-clicavel">
+          <div class="form-outline" data-mdb-input-init>
+            <label class="form-label" for="${id}_${index}">${label}${id === "matricula" ? ` ${index + 1}` : ""}</label>
+            <input class="form-control" id="${id}_${index}" type="text" value="${value}" readonly>
+          </div>
+        </a>
+      `;
+    
+      return values.map((value, index) => {
+        if (linkFields.includes(id)) {
+          return createLink(value, id, index);
+        }
         return `
           <div class="form-outline" data-mdb-input-init>
-            <label class="form-label" for="${id}">${label}</label>
-            <input class="form-control" id="${id}" type="text" value="${values}" readonly>
+            <label class="form-label" for="${id}_${index}">${label}${id === "matricula" ? ` ${index + 1}` : ""}</label>
+            <input class="form-control" id="${id}_${index}" type="text" value="${value}" readonly>
           </div>
         `;
-      }
-
-      return values.map((value, index) => `
-        <div class="form-outline" data-mdb-input-init>
-          <label class="form-label" for="${id}_${index}">${label}${id === "matricula" ? ` ${index + 1}` : ""}</label>
-          <input class="form-control" id="${id}_${index}" type="text" value="${value}" readonly>
-        </div>
-      `).join("");
+      }).join("");
     }
 
     async getCurrentMovie() {

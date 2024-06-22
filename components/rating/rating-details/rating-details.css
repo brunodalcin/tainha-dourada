@@ -82,4 +82,16 @@ button:hover {
 .star-rating input[type="radio"]:checked ~ label {
   color: #ff6700;
 }
+.link-clicavel {
+  text-decoration: none;
+  color: inherit;
+}
+.link-clicavel input {
+  cursor: pointer;
+  color: #0019ff;
+  text-decoration: none;
+}
+.link-clicavel input:hover {
+  text-decoration: underline;
+}
   

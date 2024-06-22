@@ -10,43 +10,48 @@ customElements.define(
       let selectedGenre = null;
 
       this.innerHTML = ` 
-  <link rel="stylesheet" href="/components/rating/rating.css">
-  <header>
-    <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">           
-        <div btn-group d-flex " ${isAdm ? "" : 'style="display:none"'} ">
-          <button id="ranking-btn" class="btn btn-primary">Ver Rankings</button>                
-        </div>       
-  </header>                
-  <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
-    <input type="radio" class="btn-check" name="genre" id="btn-check-todos" autocomplete="off" value="todos" checked>
-    <label class="btn btn-outline-primary" for="btn-check-todos">Todos</label>
+        <link rel="stylesheet" href="/components/rating/rating.css">
+        <header>
+          <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">           
+              <div btn-group d-flex " ${isAdm ? "" : 'style="display:none"'} ">
+                <button id="ranking-btn" class="btn btn-primary">Ver Rankings</button>                
+              </div>       
+        </header>                
+        <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="genre" id="btn-check-todos" autocomplete="off" value="todos" checked>
+          <label class="btn btn-outline-primary" for="btn-check-todos">Todos</label>
 
-    <input type="radio" class="btn-check" name="genre" id="btn-check-clipe" autocomplete="off" value="Videoclipe">
-    <label class="btn btn-outline-primary" for="btn-check-clipe">Videoclipe</label>
+          <input type="radio" class="btn-check" name="genre" id="btn-check-clipe" autocomplete="off" value="Videoclipe">
+          <label class="btn btn-outline-primary" for="btn-check-clipe">Videoclipe</label>
 
-    <input type="radio" class="btn-check" name="genre" id="btn-check-doc" autocomplete="off" value="Documentário">
-    <label class="btn btn-outline-primary" for="btn-check-doc">Documentário</label>
+          <input type="radio" class="btn-check" name="genre" id="btn-check-doc" autocomplete="off" value="Documentário">
+          <label class="btn btn-outline-primary" for="btn-check-doc">Documentário</label>
 
-    <input type="radio" class="btn-check" name="genre" id="btn-check-fic" autocomplete="off" value="Ficção">
-    <label class="btn btn-outline-primary" for="btn-check-fic">Ficção</label>
+          <input type="radio" class="btn-check" name="genre" id="btn-check-fic" autocomplete="off" value="Ficção">
+          <label class="btn btn-outline-primary" for="btn-check-fic">Ficção</label>
 
-    <input type="radio" class="btn-check" name="genre" id="btn-check-pep" autocomplete="off" value="Pepa">
-    <label class="btn btn-outline-primary" for="btn-check-pep">Pepa</label>
-  </div>      
-    <h1>CURTAS CONCORRENTES</h1>
+          <input type="radio" class="btn-check" name="genre" id="btn-check-pep" autocomplete="off" value="Pepa">
+          <label class="btn btn-outline-primary" for="btn-check-pep">Pepa</label>
+        </div>         
+          <h1>CURTAS CONCORRENTES</h1>
 
-  <div class="container">
-    <div class="row" id="movie-list"></div>
-  </div>`;
+        <div class="container">
+          <div class="row" id="movie-list"></div>
+        </div>`;       
 
-      const renderMovies = async () => {
+     const renderMovies = async () => {
         let query = formsRef;
+        // Faz a filtragem se um gênero foi selecionado
         if (selectedGenre && selectedGenre !== "todos") {
           if (selectedGenre === "Pepa") {
             query = query.where("PEPA", "==", true);
           } else {
             query = query.where("genero", "==", selectedGenre);
           }
+        }
+        // Se for jurado, só mostra os participantes
+        if (!isAdm) {
+          query = query.where("PARTICIPANTE", "==", true);
         }
 
         try {
@@ -62,21 +67,19 @@ customElements.define(
           const movies = Object.values(moviesMap);
           const movieList = document.getElementById("movie-list");
 
-          //
-
           movieList.innerHTML = "";
           movies.forEach((movie) => {
             const col = document.createElement("div");
             col.classList.add("col-md-3");
             col.innerHTML = ` 
-        <div class="card" data-titulo="${movie.titulo}">
-          <img data-src="https://festivaltainhadourada2024.com/img/${movie.uid}.webp" class="card-img-top movie-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">${movie.titulo}</h5>
-            <p class="card-text">Direção: ${movie.direcao}</p>
-            <p class="card-text text-end">Gênero: ${movie.genero}</p>                      
-          </div>
-        </div>`;
+          <div class="card" data-titulo="${movie.titulo}">           
+            <img data-src="https://festivaltainhadourada2024.com/img/${movie.uid}.webp" class="card-img-top movie-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${movie.titulo}</h5>
+              <p class="card-text">Direção: ${movie.direcao}</p>
+              <p class="card-text text-end">Gênero: ${movie.genero}</p>   
+            </div>
+          </div>`;
             movieList.appendChild(col);
           });
 
@@ -168,7 +171,7 @@ customElements.define(
           selectedGenre = event.target.value;
           renderMovies();
         }
-      });
+      });      
     }
   }
 );
