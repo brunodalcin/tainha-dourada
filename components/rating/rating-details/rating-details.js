@@ -112,7 +112,7 @@
                 ${this.createInput("Observações de Acesso", "obs-acesso", this._movieData["obs-acesso"])}
                 ${this.createInput("Gênero", "genero", this._movieData.genero)}              
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 text-center">
                 <div class="form-group">
                   <label for="n1">Aspectos Técnicos </label>
                   <div class="star-rating">

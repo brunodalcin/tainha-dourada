@@ -8,6 +8,7 @@ customElements.define(
       const isAdm = user.login === "adm";
 
       let selectedGenre = null;
+      let selectedRatingFilter = "todos";
 
       this.innerHTML = ` 
         <link rel="stylesheet" href="/components/rating/rating.css">
@@ -16,7 +17,7 @@ customElements.define(
               <div btn-group d-flex " ${isAdm ? "" : 'style="display:none"'} ">
                 <button id="ranking-btn" class="btn btn-primary">Ver Rankings</button>                
               </div>       
-        </header>                
+        </header>                 
         <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
           <input type="radio" class="btn-check" name="genre" id="btn-check-todos" autocomplete="off" value="todos" checked>
           <label class="btn btn-outline-primary" for="btn-check-todos">Todos</label>
@@ -32,15 +33,29 @@ customElements.define(
 
           <input type="radio" class="btn-check" name="genre" id="btn-check-pep" autocomplete="off" value="Pepa">
           <label class="btn btn-outline-primary" for="btn-check-pep">Pepa</label>
-        </div>         
-          <h1>CURTAS CONCORRENTES</h1>
+        </div> 
+
+        ${isAdm ? '' : `
+        <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="ratingFilter" id="btn-check-all" autocomplete="off" value="todos" checked>
+          <label class="btn btn-outline-primary" for="btn-check-all">Todos</label>
+
+          <input type="radio" class="btn-check" name="ratingFilter" id="btn-check-rated" autocomplete="off" value="avaliados">
+          <label class="btn btn-outline-primary" for="btn-check-rated">Avaliados</label>
+
+          <input type="radio" class="btn-check" name="ratingFilter" id="btn-check-unrated" autocomplete="off" value="nao-avaliados">
+          <label class="btn btn-outline-primary" for="btn-check-unrated">Não Avaliados</label>
+        </div>`}
+
+        <h1>CURTAS CONCORRENTES</h1>
 
         <div class="container">
           <div class="row" id="movie-list"></div>
         </div>`;       
 
-     const renderMovies = async () => {
+      const renderMovies = async () => {
         let query = formsRef;
+
         // Faz a filtragem se um gênero foi selecionado
         if (selectedGenre && selectedGenre !== "todos") {
           if (selectedGenre === "Pepa") {
@@ -49,6 +64,7 @@ customElements.define(
             query = query.where("genero", "==", selectedGenre);
           }
         }
+
         // Se for jurado, só mostra os participantes
         if (!isAdm) {
           query = query.where("PARTICIPANTE", "==", true);
@@ -67,19 +83,42 @@ customElements.define(
           const movies = Object.values(moviesMap);
           const movieList = document.getElementById("movie-list");
 
+          // Looping para verificar se o filme já foi avaliado
+          async function checkRatedMovies(user, movies) {
+            return Promise.all(
+              movies.map(async (movie) => {
+                const rated = await movieAlreadyRated(user.uid, movie.uid);
+                return { ...movie, rated };
+              })
+            );
+          }
+
+          // Verifica se o filme já foi avaliado pelo usuário logado
+          const moviesWithRating = await checkRatedMovies(user, movies);
+
+          // Filtragem por status de avaliação
+          let filteredMovies = moviesWithRating;
+          if (selectedRatingFilter === "avaliados") {
+            filteredMovies = moviesWithRating.filter(movie => movie.rated);
+          } else if (selectedRatingFilter === "nao-avaliados") {
+            filteredMovies = moviesWithRating.filter(movie => !movie.rated);
+          }
+
           movieList.innerHTML = "";
-          movies.forEach((movie) => {
+
+          // Renderiza os filmes
+          filteredMovies.forEach(movie => {
             const col = document.createElement("div");
             col.classList.add("col-md-3");
             col.innerHTML = ` 
-          <div class="card" data-titulo="${movie.titulo}">           
-            <img data-src="https://festivaltainhadourada2024.com/img/${movie.uid}.webp" class="card-img-top movie-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">${movie.titulo}</h5>
-              <p class="card-text">Direção: ${movie.direcao}</p>
-              <p class="card-text text-end">Gênero: ${movie.genero}</p>   
-            </div>
-          </div>`;
+              <div class="card${movie.rated ? ' rated' : ''}" data-titulo="${movie.titulo}">           
+                 ${movie.rated ? '<h5 class="text-success">Você já avaliou esse Curta</h5>' : ''}         
+                <img data-src="https://festivaltainhadourada2024.com/img/${movie.uid}.webp" class="card-img-top movie-img" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">${movie.titulo}</h5>
+                  <p class="card-text">Direção: ${movie.direcao}</p>
+                  <p class="card-text text-end">Gênero: ${movie.genero}</p>   
+                </div>`;
             movieList.appendChild(col);
           });
 
@@ -124,8 +163,7 @@ customElements.define(
             card.addEventListener("click", async () => {
               const titulo = card.getAttribute("data-titulo");
               const selectedMovie = moviesMap[titulo];
-              const contentContainer =
-                document.getElementById("content-container");
+              const contentContainer = document.getElementById("content-container");
               contentContainer.innerHTML = "";
 
               try {
@@ -169,6 +207,9 @@ customElements.define(
       document.addEventListener("change", (event) => {
         if (event.target && event.target.name === "genre") {
           selectedGenre = event.target.value;
+          renderMovies();
+        } else if (event.target && event.target.name === "ratingFilter") {
+          selectedRatingFilter = event.target.value;
           renderMovies();
         }
       });      

@@ -10,7 +10,7 @@ function loadComponent(componentName) {
   }
 }
 
-// Função para obter o usuário logado
+// Obter o usuário logado
 async function getCurrentUser() {
   const userId = localStorage.getItem("loggedInUserId");
   if (!userId) {
@@ -30,5 +30,21 @@ async function getCurrentUser() {
   } catch (error) {
     console.error("Erro ao obter o usuário logado:", error);
     return null;
+  }
+}
+
+// Verificar se um filme já foi avaliado pelo usuário
+async function movieAlreadyRated(userId, movieId) {
+  try {
+    const ratingSnapshot = await firebase
+      .firestore()
+      .collection("RATINGS")
+      .where("userId", "==", userId)
+      .where("movieId", "==", movieId)
+      .get();
+    return !ratingSnapshot.empty;
+  } catch (error) {
+    console.error("Erro ao verificar se o filme já foi avaliado:", error);
+    return false;
   }
 }
