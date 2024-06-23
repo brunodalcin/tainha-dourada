@@ -1,20 +1,54 @@
-.ranking-table h4 {
-    color: #333;
-}
-
-.table-light th,
-.table-light td {
-    color: #555;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.table-sm th,
-.table-sm td {
-    padding: 0.3rem;
-}
+header {
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 10px 20px; */
+    background-color: #ff6700;
+    color: white;
+  }
+  .container {
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .ranking-table {
+    margin-bottom: 30px;
+  }
+  
+  .ranking-table h4 {
+    background-color: #ff660096;
+    color: white;
+    padding: 10px;
+    margin: 0;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .table-responsive {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+  }
+  
+  .table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .table thead th {
+    text-align: center;
+  }
 
 header {
     background-color: #ff6700;
@@ -30,7 +64,7 @@ header img {
 h1 {
     text-align: center;
     margin: 30px;
-    color: #0019ff;
+    color: #001affbe;
     /* font-weight: bold; */
 }
 

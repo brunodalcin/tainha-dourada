@@ -12,33 +12,46 @@ customElements.define('ranking-component', class extends HTMLElement {
 
     ratingsSnapshot.forEach(doc => {
       const data = doc.data();
-      const { userId, movieId, aspectoTecnico, concepcaoEstetica, relevanciaTema } = data;
+      const { userId, movieId, direcao, fotografia, direcaoArte, audioSom, edicaoMontagem, roteiro, atuacao } = data;
 
       // Group ratings by user
       if (!ratingsByUser[userId]) {
         ratingsByUser[userId] = [];
       }
       ratingsByUser[userId].push({
+        userId,
         movieId,
-        aspectoTecnico,
-        concepcaoEstetica,
-        relevanciaTema,
-        total: aspectoTecnico + concepcaoEstetica + relevanciaTema
+        direcao,
+        fotografia,
+        direcaoArte,
+        audioSom,
+        edicaoMontagem,
+        roteiro,
+        atuacao,
+        total: direcao + fotografia + direcaoArte + audioSom + edicaoMontagem + roteiro + atuacao
       });
 
       // Aggregate ratings by movie
       if (!movieRatings[movieId]) {
         movieRatings[movieId] = {
-          aspectoTecnico: 0,
-          concepcaoEstetica: 0,
-          relevanciaTema: 0,
+          direcao: 0,
+          fotografia: 0,
+          direcaoArte: 0,
+          audioSom: 0,
+          edicaoMontagem: 0,
+          roteiro: 0,
+          atuacao: 0,
           total: 0
         };
       }
-      movieRatings[movieId].aspectoTecnico += aspectoTecnico;
-      movieRatings[movieId].concepcaoEstetica += concepcaoEstetica;
-      movieRatings[movieId].relevanciaTema += relevanciaTema;
-      movieRatings[movieId].total += aspectoTecnico + concepcaoEstetica + relevanciaTema;
+      movieRatings[movieId].direcao += direcao;
+      movieRatings[movieId].fotografia += fotografia;
+      movieRatings[movieId].direcaoArte += direcaoArte;
+      movieRatings[movieId].audioSom += audioSom;
+      movieRatings[movieId].edicaoMontagem += edicaoMontagem;
+      movieRatings[movieId].roteiro += roteiro;
+      movieRatings[movieId].atuacao += atuacao;
+      movieRatings[movieId].total += direcao + fotografia + direcaoArte + audioSom + edicaoMontagem + roteiro + atuacao;
     });
 
     // Fetch movie data
@@ -67,7 +80,8 @@ customElements.define('ranking-component', class extends HTMLElement {
           genres.Documentário.push(movieData);
         } else if (data.genero === 'Videoclipe') {
           genres.Videoclipe.push(movieData);
-        } else if (data.genero === 'Pepa') {
+        }
+        if (data.PEPA) {
           genres.Pepa.push(movieData);
         }
       }
@@ -93,37 +107,21 @@ customElements.define('ranking-component', class extends HTMLElement {
     // Render the rankings
     this.innerHTML = `
       <link rel="stylesheet" href="components/ranking/ranking.css">              
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css">
       <header class="mb-4">
         <img src="assets/TAINHA-BRANCO-TRANSPARENTE.png" alt="Logo">  
         <div btn-group d-flex>
           <button id="curtas-btn" class="btn btn-primary">VER CURTAS CONCORRENTES</button>                
         </div>
-      </header>      
+      </header>          
       <div class="container mt-5">
         <h1 class="mb-4">Rankings por Gênero</h1>
-        <div class="row">
-          <div class="col-md-6">
-            ${this.renderRankingTable('Melhor Ficção', genres.Ficção)}
-          </div>
-          <div class="col-md-6">
-            ${this.renderRankingTable('Melhor Documentário', genres.Documentário)}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            ${this.renderRankingTable('Melhor Videoclipe', genres.Videoclipe)}
-          </div>
-          <div class="col-md-6">
-            ${this.renderRankingTable('Melhor Pepa', genres.Pepa)}
-          </div>
-        </div>
+        ${this.renderRankingTable('Melhor Ficção', genres.Ficção)}
+        ${this.renderRankingTable('Melhor Documentário', genres.Documentário)}
+        ${this.renderRankingTable('Melhor Videoclipe', genres.Videoclipe)}
+        ${this.renderRankingTable('Melhor Pepa', genres.Pepa)}
         <h1 class="mb-4">Rankings por Usuário</h1>
-        <div class="row">
-          <div class="col-md-12">
-            ${users.map(user => this.renderUserRankingTable(user, ratingsByUser[user.id], movieTitles)).join('')}
-          </div>
-        </div>
+        ${users.map(user => this.renderUserRankingTable(user, ratingsByUser[user.id], movieTitles)).join('')}
       </div>
     `;
 
@@ -143,10 +141,14 @@ customElements.define('ranking-component', class extends HTMLElement {
             <thead class="thead-light">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Título</th>
-                <th scope="col">Técnico</th>
-                <th scope="col">Estética</th>
-                <th scope="col">Tema</th>
+                <th scope="col">Título</th>                
+                <th scope="col">Direção</th>
+                <th scope="col">Fotografia</th>
+                <th scope="col">Direção de Arte</th>
+                <th scope="col">Áudio e Som</th>
+                <th scope="col">Edição e Montagem</th>
+                <th scope="col">Roteiro</th>
+                <th scope="col">Atuação</th>
                 <th scope="col">Total</th>
               </tr>
             </thead>
@@ -155,10 +157,14 @@ customElements.define('ranking-component', class extends HTMLElement {
                 <tr>
                   <th scope="row">${index + 1}</th>
                   <td>${movie.titulo}</td>
-                  <td>${movie.aspectoTecnico.toFixed(2)}</td>
-                  <td>${movie.concepcaoEstetica.toFixed(2)}</td>
-                  <td>${movie.relevanciaTema.toFixed(2)}</td>
-                  <td><b>${movie.total.toFixed(2)}</b></td>
+                  <td>${movie.direcao}</td>
+                  <td>${movie.fotografia}</td>
+                  <td>${movie.direcaoArte}</td>
+                  <td>${movie.audioSom}</td>
+                  <td>${movie.edicaoMontagem}</td>
+                  <td>${movie.roteiro}</td>
+                  <td>${movie.atuacao}</td>                                                 
+                  <td><b>${movie.total}</b></td>
                 </tr>
               `).join('')}
             </tbody>
@@ -169,18 +175,23 @@ customElements.define('ranking-component', class extends HTMLElement {
   }
 
   renderUserRankingTable(user, ratings, movieTitles) {
+    ratings.sort((a, b) => b.total - a.total);
     return `
       <div class="ranking-table mb-4">
-        <h4 class="mb-3">${user.nome}</h4>
+        <h4 class="mb-3">Ranking de ${user.nome}</h4>
         <div class="table-responsive">
           <table class="table table-light table-striped table-sm">
             <thead class="thead-light">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Título</th>
-                <th scope="col">Técnico</th>
-                <th scope="col">Estética</th>
-                <th scope="col">Tema</th>
+                <th scope="col">Direção</th>
+                <th scope="col">Fotografia</th>
+                <th scope="col">Direção de Arte</th>
+                <th scope="col">Áudio e Som</th>
+                <th scope="col">Edição e Montagem</th>
+                <th scope="col">Roteiro</th>
+                <th scope="col">Atuação</th>
                 <th scope="col">Total</th>
               </tr>
             </thead>
@@ -188,11 +199,15 @@ customElements.define('ranking-component', class extends HTMLElement {
               ${ratings.map((rating, index) => `
                 <tr>
                   <th scope="row">${index + 1}</th>
-                  <td>${movieTitles[rating.movieId]}</td>
-                  <td>${rating.aspectoTecnico.toFixed(2)}</td>
-                  <td>${rating.concepcaoEstetica.toFixed(2)}</td>
-                  <td>${rating.relevanciaTema.toFixed(2)}</td>
-                  <td><b>${rating.total.toFixed(2)}</b></td>
+                  <td>${movieTitles[rating.movieId] || 'N/A'}</td>
+                  <td>${rating.direcao}</td>
+                  <td>${rating.fotografia}</td>
+                  <td>${rating.direcaoArte}</td>
+                  <td>${rating.audioSom}</td>
+                  <td>${rating.edicaoMontagem}</td>
+                  <td>${rating.roteiro}</td>
+                  <td>${rating.atuacao}</td>                                                 
+                  <td><b>${rating.total}</b></td>
                 </tr>
               `).join('')}
             </tbody>

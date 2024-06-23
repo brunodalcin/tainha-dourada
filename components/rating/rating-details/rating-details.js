@@ -28,7 +28,6 @@
       const isAdm = user.login === 'adm'; // Verifica se o usuário é admin
       const movieId = movie;
       const matriculaFiles = await this.getMatriculaFiles(this._movieData.titulo);
-
       const userRating = await this.getUserRating(user.uid, movieId);
 
       this.innerHTML = `
@@ -114,18 +113,34 @@
               </div>
               <div class="col-md-6 text-center">
                 <div class="form-group">
-                  <label for="n1">Aspectos Técnicos </label>
+                  <label for="n1">DIREÇÃO</label>
                   <div class="star-rating">
-                    ${this.createStars("n1", userRating ? userRating.aspectoTecnico : 0, 5)}
+                    ${this.createStars("n1", userRating ? userRating.direcao : 0, 5)}
                   </div>
-                  <label for="n2">Concepção Estética</label>
+                  <label for="n2">FOTOGRAFIA</label>
                   <div class="star-rating">
-                    ${this.createStars("n2", userRating ? userRating.concepcaoEstetica : 0, 5)}
+                    ${this.createStars("n2", userRating ? userRating.fotografia : 0, 5)}
                   </div>
-                  <label for="n3">Relevância do Tema</label>
+                  <label for="n3">DIREÇÃO E ARTE</label>
                   <div class="star-rating">
-                    ${this.createStars("n3", userRating ? userRating.relevanciaTema : 0, 5)}
+                    ${this.createStars("n3", userRating ? userRating.direcaoArte : 0, 5)}
                   </div>
+                  <label for="n4">ÁUDIO E SOM</label>
+                  <div class="star-rating">
+                    ${this.createStars("n4", userRating ? userRating.audioSom : 0, 5)}
+                  </div>
+                  <label for="n5">EDIÇÃO E MONTAGEM</label>
+                  <div class="star-rating">
+                    ${this.createStars("n5", userRating ? userRating.edicaoMontagem : 0, 5)}
+                  </div>
+                  <label for="n6">ROTEIRO</label>
+                  <div class="star-rating">
+                    ${this.createStars("n6", userRating ? userRating.roteiro : 0, 5)}
+                  </div>     
+                  <label for="n7">ATUAÇÃO</label>
+                  <div class="star-rating">
+                    ${this.createStars("n7", userRating ? userRating.atuacao : 0, 5)}
+                  </div>                                 
                 </div>
                 <button type="button" id="submit-rating" class="btn btn-primary" ${userRating ? "disabled" : ""}>Enviar Notas</button>
               </div>
@@ -135,9 +150,14 @@
       }
 
       if (userRating) {
-        this.querySelectorAll(`input[name="n1"][value="${userRating.aspectoTecnico}"]`).forEach(el => el.checked = true);
-        this.querySelectorAll(`input[name="n2"][value="${userRating.concepcaoEstetica}"]`).forEach(el => el.checked = true);
-        this.querySelectorAll(`input[name="n3"][value="${userRating.relevanciaTema}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n1"][value="${userRating.direcao}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n2"][value="${userRating.fotografia}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n3"][value="${userRating.direcaoArte}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n4"][value="${userRating.audioSom}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n5"][value="${userRating.edicaoMontagem}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n6"][value="${userRating.roteiro}"]`).forEach(el => el.checked = true);
+        this.querySelectorAll(`input[name="n7"][value="${userRating.atuacao}"]`).forEach(el => el.checked = true);
+                
       } else if (!isAdm) {
         this.querySelector('#submit-rating').addEventListener('click', () => this.submitRating(user.uid, movieId));
       }
@@ -241,16 +261,25 @@
     }
 
     async submitRating(userId, movieId) {
-      const aspectoTecnico = parseInt(this.querySelector(`input[name="n1"]:checked`).value);
-      const concepcaoEstetica = parseInt(this.querySelector(`input[name="n2"]:checked`).value);
-      const relevanciaTema = parseInt(this.querySelector(`input[name="n3"]:checked`).value);
+      const direcao = parseInt(this.querySelector(`input[name="n1"]:checked`).value);
+      const fotografia = parseInt(this.querySelector(`input[name="n2"]:checked`).value);
+      const direcaoArte = parseInt(this.querySelector(`input[name="n3"]:checked`).value);
+      const audioSom = parseInt(this.querySelector(`input[name="n4"]:checked`).value);
+      const edicaoMontagem = parseInt(this.querySelector(`input[name="n5"]:checked`).value);
+      const roteiro = parseInt(this.querySelector(`input[name="n6"]:checked`).value);
+      const atuacao = parseInt(this.querySelector(`input[name="n7"]:checked`).value);
+            
 
       const ratingData = {
         userId: userId,
         movieId: movieId,
-        aspectoTecnico: aspectoTecnico,
-        concepcaoEstetica: concepcaoEstetica,
-        relevanciaTema: relevanciaTema,
+        direcao: direcao,
+        fotografia: fotografia,
+        direcaoArte: direcaoArte,
+        audioSom: audioSom,
+        edicaoMontagem: edicaoMontagem,
+        roteiro: roteiro,
+        atuacao: atuacao,        
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       };
 
